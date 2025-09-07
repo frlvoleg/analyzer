@@ -1,0 +1,318 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://crypto-analyzer.local/schemas/project-data.json",
+  "title": "ProjectData",
+  "type": "object",
+  "required": ["id", "name", "chain", "category", "tvl", "investors", "social", "platform", "eventTimestamp", "metadata", "dataTimestamp", "cutoffTimestamp"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataTimestamp": {
+      "type": "number",
+      "minimum": 0
+    },
+    "cutoffTimestamp": {
+      "type": "number",
+      "minimum": 0
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "chain": {
+      "type": "string",
+      "enum": ["ethereum", "bsc", "polygon", "arbitrum", "optimism", "avalanche", "fantom", "solana"]
+    },
+    "category": {
+      "type": "string",
+      "enum": ["defi", "nft", "gaming", "infrastructure", "dao", "lending", "dex", "bridge"]
+    },
+    "tvl": {
+      "$ref": "#/definitions/TvlData"
+    },
+    "investors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/InvestorData"
+      }
+    },
+    "social": {
+      "$ref": "#/definitions/SocialData"
+    },
+    "platform": {
+      "$ref": "#/definitions/PlatformData"
+    },
+    "eventTimestamp": {
+      "type": "number",
+      "minimum": 0
+    },
+    "metadata": {
+      "$ref": "#/definitions/ProjectMetadata"
+    }
+  },
+  "definitions": {
+    "TvlData": {
+      "type": "object",
+      "required": ["current", "change7d", "change30d"],
+      "properties": {
+        "current": {
+          "type": "number",
+          "minimum": 0
+        },
+        "change7d": {
+          "type": "number"
+        },
+        "change30d": {
+          "type": "number"
+        },
+        "rank": {
+          "type": "number",
+          "minimum": 1
+        },
+        "percentile": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "InvestorData": {
+      "type": "object",
+      "required": ["name", "tier", "timestamp", "verified"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tier": {
+          "type": "string",
+          "enum": ["S", "A", "B", "C"]
+        },
+        "investmentAmount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "round": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number",
+          "minimum": 0
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SocialData": {
+      "type": "object",
+      "properties": {
+        "twitter": {
+          "$ref": "#/definitions/TwitterMetrics"
+        },
+        "discord": {
+          "$ref": "#/definitions/DiscordMetrics"
+        },
+        "telegram": {
+          "$ref": "#/definitions/TelegramMetrics"
+        },
+        "github": {
+          "$ref": "#/definitions/GithubMetrics"
+        }
+      }
+    },
+    "TwitterMetrics": {
+      "type": "object",
+      "required": ["followers", "followersChange7d", "engagement", "verified"],
+      "properties": {
+        "followers": {
+          "type": "number",
+          "minimum": 0
+        },
+        "followersChange7d": {
+          "type": "number"
+        },
+        "engagement": {
+          "type": "number",
+          "minimum": 0
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DiscordMetrics": {
+      "type": "object",
+      "required": ["members", "activeMembers", "membersChange7d"],
+      "properties": {
+        "members": {
+          "type": "number",
+          "minimum": 0
+        },
+        "activeMembers": {
+          "type": "number",
+          "minimum": 0
+        },
+        "membersChange7d": {
+          "type": "number"
+        }
+      }
+    },
+    "TelegramMetrics": {
+      "type": "object",
+      "required": ["members", "membersChange7d"],
+      "properties": {
+        "members": {
+          "type": "number",
+          "minimum": 0
+        },
+        "membersChange7d": {
+          "type": "number"
+        }
+      }
+    },
+    "GithubMetrics": {
+      "type": "object",
+      "required": ["stars", "forks", "commits30d", "contributors"],
+      "properties": {
+        "stars": {
+          "type": "number",
+          "minimum": 0
+        },
+        "forks": {
+          "type": "number",
+          "minimum": 0
+        },
+        "commits30d": {
+          "type": "number",
+          "minimum": 0
+        },
+        "contributors": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "PlatformData": {
+      "type": "object",
+      "required": ["website"],
+      "properties": {
+        "website": {
+          "$ref": "#/definitions/WebsiteMetrics"
+        },
+        "documentation": {
+          "$ref": "#/definitions/DocumentationMetrics"
+        },
+        "whitepaper": {
+          "$ref": "#/definitions/WhitepaperMetrics"
+        }
+      }
+    },
+    "WebsiteMetrics": {
+      "type": "object",
+      "required": ["online", "loadTime", "sslCertificate", "domainAge"],
+      "properties": {
+        "online": {
+          "type": "boolean"
+        },
+        "loadTime": {
+          "type": "number",
+          "minimum": 0
+        },
+        "sslCertificate": {
+          "type": "boolean"
+        },
+        "domainAge": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "DocumentationMetrics": {
+      "type": "object",
+      "required": ["available", "quality", "completeness"],
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "quality": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "completeness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "WhitepaperMetrics": {
+      "type": "object",
+      "required": ["available", "technicalDepth", "clarity"],
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "technicalDepth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "clarity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "ProjectMetadata": {
+      "type": "object",
+      "required": ["description", "tags", "riskFlags"],
+      "properties": {
+        "launchDate": {
+          "type": "number",
+          "minimum": 0
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskFlags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RiskFlag"
+          }
+        }
+      }
+    },
+    "RiskFlag": {
+      "type": "object",
+      "required": ["type", "category", "description", "severity"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "category": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

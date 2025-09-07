@@ -1,7 +1,53 @@
 {
-  "files": [],
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@crypto-analyzer/core-math": ["packages/core-math/src/index.ts"],
+      "@crypto-analyzer/validation": ["packages/validation/src/index.ts"],
+      "@crypto-analyzer/types": ["packages/types/src/index.ts"],
+      "@crypto-analyzer/scoring": ["packages/scoring/src/index.ts"],
+      "@crypto-analyzer/data-sources": ["packages/data-sources/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*", "packages/*/src/**/*"],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    { "path": "./tsconfig.node.json" },
+    {
+      "path": "./packages/core-math"
+    },
+    {
+      "path": "./packages/validation"
+    },
+    {
+      "path": "./packages/types"
+    },
+    {
+      "path": "./packages/scoring"
+    },
+    {
+      "path": "./packages/data-sources"
+    }
   ]
 }

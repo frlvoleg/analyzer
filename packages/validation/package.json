@@ -1,0 +1,29 @@
+{
+  "name": "@crypto-analyzer/validation",
+  "version": "1.0.0",
+  "description": "Validation functions and JSON schemas for crypto analyzer",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "schemas/**/*.json"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@crypto-analyzer/types": "file:../types"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "vitest": "^1.4.0"
+  }
+}
